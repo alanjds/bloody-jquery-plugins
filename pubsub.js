@@ -28,6 +28,9 @@
 		//		with a function signature like: function(a,b,c){ ... }
 		//
 		//	|		$.publish("/some/topic", ["a","b","c"]);
+		if(!cache[topic]){
+			cache[topic] = [];
+		}
 		if(cache[topic]){
 			for(var i = 0; i < cache[topic].length; i++){
 				cache[topic][i].apply(d, args || []);
@@ -68,6 +71,9 @@
 		//	|	$.unsubscribe(handle);
 		
 		var t = handle[0];
+		if(!cache[t]){
+			cache[t] = [];
+		}
 		cache[t] && d.each(cache[t], function(idx){
 			if(this == handle[1]){
 				cache[t].splice(idx, 1);
